@@ -17,9 +17,9 @@ class lap():
         self.pos4=arr[3]
 
     def find_circle(self):
-        cx=(2(self.pos1.real+self.pos4.real)-2(self.pos1.imag+self.pos4.imag)*((self.pos3.real-self.pos2.real)/(self.pos3.imag-self.pos2.imag))+4*((self.pos2.imag+self.pos3.imag)/2)*((self.pos3.real-self.pos2.real)/(self.pos3.imag-self.pos2.imag))+4*((self.pos2.real+self.pos3.real)/2)/(m*m))/(4+((self.pos3.real-self.pos2.real)/(self.pos3.imag-self.pos2.imag))**2)
-        cy=((self.pos2.imag+self.pos3.imag)/2)-((self.pos3.real-self.pos2.real)/(self.pos3.imag-self.pos2.imag))(cx-(self.pos2.real+self.pos3.real)/2)
-        r=math.sqrt((cx-self.pos2.real)**2+(cy-self.pos2.imag)**2)
+        cx=(2((self.pos1.real)+(self.pos4.real))-2((self.pos1.imag)+(self.pos4.imag))*(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))+4*(((self.pos2.imag)+(self.pos3.imag))/2)*(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))+4*(((self.pos2.real)+(self.pos3.real))/2)*(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))**2)/(4+(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))**2)
+        cy=(((self.pos2.imag)+(self.pos3.imag))/2)-(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))(cx-((self.pos2.real)+(self.pos3.real))/2)
+        r=math.sqrt((cx-(self.pos2.real))**2+(cy-(self.pos2.imag))**2)
         print("Radius=",r)
         print("Centre=(",cx,",",cy,")")
     
