@@ -1,8 +1,16 @@
 import math
 import cmath
 
+def derivative(x1,x2,x4,y1,y2,y4,xm,ym,m,cx):
+    return((-2*(x4-cx)*(y4-(ym-m*(cx-xm))) - 2*(x2-cx)*(y2-(ym-m*(cx-xm)))) / ((((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((cx-x4) + (y4-(ym-m*(cx-xm)))*m) * (((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**-0.5) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m) * (((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**-0.5)) + (-2*(x1-cx)*(y1-(ym-m*(cx-xm))) - 2*(x2-cx)*(y2-(ym-m*(cx-xm)))) / ((((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((cx-x1) + (y1-(ym-m*(cx-xm)))*m) * (((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**-0.5) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m) * (((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**-0.5)))
+    
+def equation(x1,x2,x4,y1,y2,y4,xm,ym,m,cx):
+    return(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x4) + (y4-(ym-m*(cx-xm)))*m)/(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x1) + (y1-(ym-m*(cx-xm)))*m)/(((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5))
+
+
 class lap():
 
+    
     def _init_(self):
         self.pos1
         self.pos2
@@ -17,8 +25,33 @@ class lap():
         self.pos4=arr[3]
 
     def find_circle(self):
-        cx=(2((self.pos1.real)+(self.pos4.real))-2((self.pos1.imag)+(self.pos4.imag))*(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))+4*(((self.pos2.imag)+(self.pos3.imag))/2)*(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))+4*(((self.pos2.real)+(self.pos3.real))/2)*(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))**2)/(4+(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))**2)
-        cy=(((self.pos2.imag)+(self.pos3.imag))/2)-(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))(cx-((self.pos2.real)+(self.pos3.real))/2)
+        x1=self.pos1.real
+        y1=self.pos1.imag
+        x2=self.pos2.real
+        y2=self.pos2.imag
+        x3=self.pos3.real
+        y3=self.pos3.imag
+        x4=self.pos4.real
+        y4=self.pos4.imag
+        xm=(x2+x3)/2
+        ym=(y2+y3)/2
+        m=(x3-x2)/(y3-y2)
+        
+
+        # Newton-Raphson iteration
+        cx=0 #Initial guess
+        
+        for _ in range(1000):
+            f = equation(x1,x2,x4,y1,y2,y4,xm,ym,m,cx)
+            f_prime = derivative(x1,x2,x4,y1,y2,y4,xm,ym,m,cx)
+            cx_new = cx - f / f_prime
+            
+            if abs(cx_new - cx) < 1e-6:
+                break
+
+            cx=cx_new
+    
+        cy=(((self.pos2.imag)+(self.pos3.imag))/2)-(((self.pos3.real)-(self.pos2.real))/((self.pos3.imag)-(self.pos2.imag)))*(cx-((self.pos2.real)+(self.pos3.real))/2)
         r=math.sqrt((cx-(self.pos2.real))**2+(cy-(self.pos2.imag))**2)
         print("Radius=",r)
         print("Centre=(",cx,",",cy,")")
