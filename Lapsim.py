@@ -41,7 +41,7 @@ class lap():
         # Newton-Raphson iteration
         cx=0 #Initial guess
         
-        for _ in range(1000):
+        for _ in range(1000000):
             f = equation(x1,x2,x4,y1,y2,y4,xm,ym,m,cx)
             f_prime = derivative(x1,x2,x4,y1,y2,y4,xm,ym,m,cx)
             cx_new = cx - f / f_prime
