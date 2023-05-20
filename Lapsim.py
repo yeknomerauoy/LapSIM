@@ -1,9 +1,6 @@
 import math
 import cmath
 
-def derivative(x1,x2,x4,y1,y2,y4,xm,ym,m,cx):
-    return((-2*(x4-cx)*(y4-(ym-m*(cx-xm))) - 2*(x2-cx)*(y2-(ym-m*(cx-xm)))) / ((((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((cx-x4) + (y4-(ym-m*(cx-xm)))*m) * (((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**-0.5) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m) * (((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**-0.5)) + (-2*(x1-cx)*(y1-(ym-m*(cx-xm))) - 2*(x2-cx)*(y2-(ym-m*(cx-xm)))) / ((((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((cx-x1) + (y1-(ym-m*(cx-xm)))*m) * (((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**-0.5) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m) * (((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**-0.5)))
-    
 def equation(x1,x2,x4,y1,y2,y4,xm,ym,m,cx):
     return(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x4) + (y4-(ym-m*(cx-xm)))*m)/(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x1) + (y1-(ym-m*(cx-xm)))*m)/(((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)+cx)
 
