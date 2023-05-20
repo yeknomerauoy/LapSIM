@@ -5,7 +5,7 @@ def derivative(x1,x2,x4,y1,y2,y4,xm,ym,m,cx):
     return((-2*(x4-cx)*(y4-(ym-m*(cx-xm))) - 2*(x2-cx)*(y2-(ym-m*(cx-xm)))) / ((((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((cx-x4) + (y4-(ym-m*(cx-xm)))*m) * (((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**-0.5) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m) * (((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**-0.5)) + (-2*(x1-cx)*(y1-(ym-m*(cx-xm))) - 2*(x2-cx)*(y2-(ym-m*(cx-xm)))) / ((((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((cx-x1) + (y1-(ym-m*(cx-xm)))*m) * (((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**-0.5) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m) * (((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**-0.5)))
     
 def equation(x1,x2,x4,y1,y2,y4,xm,ym,m,cx):
-    return(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x4) + (y4-(ym-m*(cx-xm)))*m)/(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x1) + (y1-(ym-m*(cx-xm)))*m)/(((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5))
+    return(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x4) + (y4-(ym-m*(cx-xm)))*m)/(((x4-cx)**2 + (y4-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)) + (((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5 - ((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5) * ((((cx-x1) + (y1-(ym-m*(cx-xm)))*m)/(((x1-cx)**2 + (y1-(ym-m*(cx-xm)))**2)**0.5)) - ((cx-x2) + (y2-(ym-m*(cx-xm)))*m)/(((x2-cx)**2 + (y2-(ym-m*(cx-xm)))**2)**0.5)+cx)
 
 
 class lap():
@@ -39,12 +39,10 @@ class lap():
         
 
         # Newton-Raphson iteration
-        cx=0 #Initial guess
+        cx=1 #Initial guess
         
         for _ in range(1000000):
-            f = equation(x1,x2,x4,y1,y2,y4,xm,ym,m,cx)
-            f_prime = derivative(x1,x2,x4,y1,y2,y4,xm,ym,m,cx)
-            cx_new = cx - f / f_prime
+            cx_new = equation(x1,x2,x4,y1,y2,y4,xm,ym,m,cx)
             
             if abs(cx_new - cx) < 1e-6:
                 break
